@@ -20,7 +20,8 @@ namespace Prueba
             InitializeComponent();
         }
 
-        public string fileComidas, daysHere, addMonday; 
+        public string fileComidas, daysHere, addMonday;
+        public int dayID, ID1; 
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -40,6 +41,7 @@ namespace Prueba
             DateTime arrival = new DateTime(2011, 8, 31);
             DateTime ahora = DateTime.Today;
             daysHere = ((ahora - arrival).TotalDays).ToString();
+            dayID = Convert.ToInt32((ahora - arrival).TotalDays);
             
             DateTime today = DateTime.Today;
             if (today.DayOfWeek == DayOfWeek.Monday) {
@@ -71,6 +73,27 @@ namespace Prueba
             nameDocGastos.Enabled = false;
             nameDocComida.Enabled = false;
             sendMeals.Enabled = false;
+
+
+            string query = "SELECT day,total,caus FROM Budget WHERE day=@day";
+            SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
+            connection.Open();
+            SqlCommand coms = new SqlCommand(query, connection);
+            coms.Parameters.AddWithValue("@day", dayID-1);
+           // coms.ExecuteNonQuery();
+            SqlDataReader reader = coms.ExecuteReader();
+            //int valID = Convert.ToInt32(coms.ExecuteReader());
+            
+
+            string tx = "";
+         
+            while (reader.Read()){
+            
+                tx=tx+reader["day"].ToString();
+               
+            }
+            breakfastMeal.Text = tx;
+            connection.Close();
 
         }
 
@@ -190,34 +213,65 @@ namespace Prueba
             //com.ExecuteNonQuery();
             //sc.Close();
             
-            Properties.Settings.Default.dbGastosId++;
+            //Properties.Settings.Default.dbGastosId++;
             button1.Text = Properties.Settings.Default.dbGastosId.ToString();
 
+            if (ID1<dayID){
+                string sql = "INSERT INTO Gastos (Id,Value) VALUES (@Id,@Value)";
+                SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
+                connection.Open();
+                SqlCommand command = new SqlCommand(sql, connection);
 
-            string sql = "INSERT INTO Gastos (Id,Value) VALUES (@Id,@Value)";
-            SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
-            connection.Open();
-            SqlCommand command = new SqlCommand(sql, connection);
+                //command.Parameters.AddWithValue("@Id", Properties.Settings.Default.dbGastosId);
+                command.Parameters.AddWithValue("@Id", dayID);
+                command.Parameters.AddWithValue("@Value", textBox6.Text);
 
-            command.Parameters.AddWithValue("@Id", Properties.Settings.Default.dbGastosId);
-            command.Parameters.AddWithValue("@Value", textBox6.Text);
+                command.ExecuteNonQuery();
+                //comma;
+                connection.Close();            
+            
+            }
+            if (ID1 == dayID) {
+                string sql = "UPDATE Gastos SET Value=@Value WHERE Id=@Id";
+                SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
+                connection.Open();
+                SqlCommand command = new SqlCommand(sql, connection);
 
-            command.ExecuteNonQuery();
-            //comma;
-            connection.Close();
+                //command.Parameters.AddWithValue("@Id", Properties.Settings.Default.dbGastosId);
+                command.Parameters.AddWithValue("@Id", dayID);
+                command.Parameters.AddWithValue("@Value", textBox6.Text);
+
+                command.ExecuteNonQuery();
+                //comma;
+                connection.Close(); 
+            
+            }
+
+            //string sql = "insert into gastos (id,value) values (@id,@value)";
+            //sqlconnection connection = new sqlconnection(@"data source=(localdb)\v11.0;attachdbfilename=c:\users\francisco\documents\visual studio 2013\projects\prueba\prueba\database1.mdf;integrated security=true");
+            //connection.open();
+            //sqlcommand command = new sqlcommand(sql, connection);
+
+            ////command.parameters.addwithvalue("@id", properties.settings.default.dbgastosid);
+            //command.parameters.addwithvalue("@id", dayid);
+            //command.parameters.addwithvalue("@value", textbox6.text);
+
+            //command.executenonquery();
+            ////comma;
+            //connection.close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string query = "SELECT MAX(ID) FROM Gastos";
+            string query = "SELECT MAX(Id) FROM Gastos";
             SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
             connection.Open(); 
             SqlCommand comSelect = new SqlCommand(query, connection);
-            int ID = Convert.ToInt32(comSelect.ExecuteScalar());
+            ID1 = Convert.ToInt32(comSelect.ExecuteScalar());
             //textBox6.Text = ID.ToString();
             connection.Close();
-            Properties.Settings.Default.dbGastosId = ID;
-            button1.Text = ID.ToString();
+            Properties.Settings.Default.dbGastosId = ID1;
+            button1.Text = ID1.ToString();
         }
 
 
