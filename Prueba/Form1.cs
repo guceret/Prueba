@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,9 @@ namespace Prueba
             InitializeComponent();
         }
 
-        public string fileComidas, daysHere, addMonday;
-        public int dayID, ID1; 
+        public string  td,tg ,thi, gastosData, fileComidas, daysHere, addMonday;
+        public int dayID, ID1;
+        public float comida, transport, accommodation, entre, supplies; 
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -30,8 +32,15 @@ namespace Prueba
             
             var dataSource = new List<Le>();
             dataSource.Add(new Le() { Name = "<Select Value>", Value = "1" });
-            dataSource.Add(new Le() { Name = "Comida", Value = "2" });
-            dataSource.Add(new Le() { Name = "Transport", Value = "8" });
+            dataSource.Add(new Le() { Name = "comida", Value = "2" });
+            dataSource.Add(new Le() { Name = "transport", Value = "3" });
+            dataSource.Add(new Le() { Name = "supplies", Value = "4" });
+            dataSource.Add(new Le() { Name = "accommodation", Value = "5" });
+            dataSource.Add(new Le() { Name = "salud", Value = "6" });
+            dataSource.Add(new Le() { Name = "entre", Value = "7" });
+            dataSource.Add(new Le() { Name = "cell", Value = "8" });
+            dataSource.Add(new Le() { Name = "others", Value = "9" });
+  
             //Setup data binding
             this.typeSpenditure.DataSource = dataSource;
             this.typeSpenditure.DisplayMember = "Name";
@@ -75,7 +84,9 @@ namespace Prueba
             sendMeals.Enabled = false;
 
 
-            string query = "SELECT day,total,caus FROM Budget WHERE day=@day";
+            //string query = "SELECT day,total,caus,credit,cash,dos,bwest FROM Budget WHERE day=@day";
+            string query = "SELECT * FROM Budget WHERE day=@day";
+            //string query = "SELECT * FROM Budget";
             SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
             connection.Open();
             SqlCommand coms = new SqlCommand(query, connection);
@@ -85,15 +96,28 @@ namespace Prueba
             //int valID = Convert.ToInt32(coms.ExecuteReader());
             
 
-            string tx = "";
-         
+            string tx = "";//, td="", tg="";
+            List<string> list = new List<string>();
             while (reader.Read()){
             
                 tx=tx+reader["day"].ToString();
-               
+                td =  reader["cash"].ToString() +" cash "+ reader["caus"].ToString() + " caus "+ reader["dos"].ToString() + " dos " +reader["bwest"].ToString() +" bwest "+ reader["credit"].ToString() + " credit";
+                tg =  reader["total"].ToString() + " total";
+                comida = float.Parse(reader["comida"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                list.Add(reader["day"].ToString());  
             }
+
             breakfastMeal.Text = tx;
+            dataGastos.Text = td + Environment.NewLine + tg;
             connection.Close();
+
+            textBox3.Text = comida.ToString();
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                richTextBox1.Text += list[i];
+            }
+
 
         }
 
@@ -101,8 +125,10 @@ namespace Prueba
         {
             if (typeSpenditure.SelectedIndex > 0)
             {
-                this.textBox3.Text = this.typeSpenditure.SelectedValue.ToString();
+                //this.textBox3.Text = this.typeSpenditure.SelectedValue.ToString();
+                thi = typeSpenditure.GetItemText(this.typeSpenditure.SelectedItem);
             }
+
         }
 
         private void sendMeals_Click(object sender, EventArgs e)
@@ -174,6 +200,7 @@ namespace Prueba
                 //label1.Text = openFileDia.SafeFileName;
                 string docGastos = openFileGastos.FileName;
                 nameDocGastos.Text = docGastos;
+                writeDocGastos.Enabled = true; 
             }
         }
 
@@ -273,6 +300,84 @@ namespace Prueba
             Properties.Settings.Default.dbGastosId = ID1;
             button1.Text = ID1.ToString();
         }
+
+        private void value_TextChanged(object sender, EventArgs e)
+        {
+            //string gastosData = "";
+            //gastosData +=  value.Text + " " + thi;
+            
+
+        }
+
+        private void nextGasto_Click(object sender, EventArgs e)
+        {
+            gastosData += value.Text + " " + thi + " " + descriptionGasto.Text;
+            dataGastos.Text = td + Environment.NewLine + tg + Environment.NewLine + gastosData;
+            gastosData = gastosData + Environment.NewLine;
+
+
+            if (Convert.ToInt32(this.typeSpenditure.SelectedValue) == 2)
+            {
+                float cd = float.Parse(value.Text, CultureInfo.InvariantCulture.NumberFormat);
+                comida += cd;
+                textBox3.Text = comida.ToString();
+                string sql = "UPDATE Budget SET comida=@comida WHERE day=@day";
+                SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
+                connection.Open();
+                SqlCommand command = new SqlCommand(sql, connection);
+
+                //command.Parameters.AddWithValue("@Id", Properties.Settings.Default.dbGastosId);
+                command.Parameters.AddWithValue("@day", dayID);
+                command.Parameters.AddWithValue("@comida", comida);
+
+                command.ExecuteNonQuery();
+                //comma;
+                connection.Close();
+            }
+
+
+        }
+
+        private void writeDocGastos_Click(object sender, EventArgs e)
+        {
+            string salvar = td + Environment.NewLine + tg + Environment.NewLine + gastosData;
+
+            string fileName = nameDocGastos.Text;
+            if (!File.Exists(fileName))
+            {
+                var doc1 = DocX.Create(fileName);
+                doc1.Save();
+            }
+
+            // Create a document in memory:
+            var doc = DocX.Load(fileName);
+            string headlineText = daysHere + addMonday;
+
+            // A formatting object for our headline:
+            var headLineFormat = new Formatting();
+            headLineFormat.FontFamily = new System.Drawing.FontFamily("Calibri");
+            headLineFormat.Size = 18D;
+            //headLineFormat.Position = 12;
+
+            // A formatting object for our normal paragraph text:
+            var paraFormat = new Formatting();
+            paraFormat.FontFamily = new System.Drawing.FontFamily("Calibri");
+            paraFormat.Size = 11D;
+
+            // Insert the now text obejcts;
+            doc.InsertParagraph(headlineText, false, headLineFormat);
+            doc.InsertParagraph(salvar, false, paraFormat);
+
+            // Save to the output directory:
+            doc.Save();
+        }
+
+
+
+
+
+
+
 
 
 

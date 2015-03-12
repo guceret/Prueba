@@ -35,19 +35,9 @@
             this.breakfastMeal = new System.Windows.Forms.TextBox();
             this.dinnerMeal = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.ToDo = new System.Windows.Forms.Button();
-            this.nameDocComida = new System.Windows.Forms.TextBox();
-            this.openDocComida = new System.Windows.Forms.Button();
-            this.dataComidas = new System.Windows.Forms.TextBox();
-            this.timeToilet = new System.Windows.Forms.TextBox();
-            this.timeSpent1 = new System.Windows.Forms.Label();
-            this.timeStamp1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.nextGasto = new System.Windows.Forms.Button();
             this.dataGastos = new System.Windows.Forms.TextBox();
-            this.value = new System.Windows.Forms.TextBox();
             this.openDocGastos = new System.Windows.Forms.Button();
             this.nameDocGastos = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -64,18 +54,32 @@
             this.cash = new System.Windows.Forms.RadioButton();
             this.gift = new System.Windows.Forms.RadioButton();
             this.bwest = new System.Windows.Forms.RadioButton();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ToDo = new System.Windows.Forms.Button();
+            this.nameDocComida = new System.Windows.Forms.TextBox();
+            this.openDocComida = new System.Windows.Forms.Button();
+            this.dataComidas = new System.Windows.Forms.TextBox();
+            this.timeToilet = new System.Windows.Forms.TextBox();
+            this.timeSpent1 = new System.Windows.Forms.Label();
+            this.timeStamp1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.writeDocGastos = new System.Windows.Forms.Button();
+            this.value = new System.Windows.Forms.NumericUpDown();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.value)).BeginInit();
             this.SuspendLayout();
             // 
             // sendMeals
@@ -123,127 +127,22 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(600, 400);
+            this.tabControl1.Size = new System.Drawing.Size(820, 400);
             this.tabControl1.TabIndex = 1;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.ToDo);
-            this.tabPage1.Controls.Add(this.nameDocComida);
-            this.tabPage1.Controls.Add(this.openDocComida);
-            this.tabPage1.Controls.Add(this.dataComidas);
-            this.tabPage1.Controls.Add(this.timeToilet);
-            this.tabPage1.Controls.Add(this.timeSpent1);
-            this.tabPage1.Controls.Add(this.timeStamp1);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.sendMeals);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.lunchMeal);
-            this.tabPage1.Controls.Add(this.dinnerMeal);
-            this.tabPage1.Controls.Add(this.breakfastMeal);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(592, 374);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // ToDo
-            // 
-            this.ToDo.Location = new System.Drawing.Point(406, 27);
-            this.ToDo.Name = "ToDo";
-            this.ToDo.Size = new System.Drawing.Size(75, 23);
-            this.ToDo.TabIndex = 11;
-            this.ToDo.Text = "ToDo";
-            this.ToDo.UseVisualStyleBackColor = true;
-            this.ToDo.Click += new System.EventHandler(this.ToDo_Click);
-            // 
-            // nameDocComida
-            // 
-            this.nameDocComida.Location = new System.Drawing.Point(68, 348);
-            this.nameDocComida.Name = "nameDocComida";
-            this.nameDocComida.Size = new System.Drawing.Size(414, 20);
-            this.nameDocComida.TabIndex = 10;
-            // 
-            // openDocComida
-            // 
-            this.openDocComida.Location = new System.Drawing.Point(491, 345);
-            this.openDocComida.Name = "openDocComida";
-            this.openDocComida.Size = new System.Drawing.Size(75, 23);
-            this.openDocComida.TabIndex = 6;
-            this.openDocComida.Text = "Open File";
-            this.openDocComida.UseVisualStyleBackColor = true;
-            this.openDocComida.Click += new System.EventHandler(this.openDocComida_Click);
-            // 
-            // dataComidas
-            // 
-            this.dataComidas.Enabled = false;
-            this.dataComidas.Location = new System.Drawing.Point(382, 189);
-            this.dataComidas.Multiline = true;
-            this.dataComidas.Name = "dataComidas";
-            this.dataComidas.Size = new System.Drawing.Size(184, 130);
-            this.dataComidas.TabIndex = 8;
-            this.dataComidas.TabStop = false;
-            // 
-            // timeToilet
-            // 
-            this.timeToilet.Location = new System.Drawing.Point(382, 80);
-            this.timeToilet.Multiline = true;
-            this.timeToilet.Name = "timeToilet";
-            this.timeToilet.Size = new System.Drawing.Size(100, 80);
-            this.timeToilet.TabIndex = 5;
-            this.timeToilet.TextChanged += new System.EventHandler(this.timeToilet_TextChanged);
-            // 
-            // timeSpent1
-            // 
-            this.timeSpent1.AutoSize = true;
-            this.timeSpent1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeSpent1.Location = new System.Drawing.Point(65, 41);
-            this.timeSpent1.Name = "timeSpent1";
-            this.timeSpent1.Size = new System.Drawing.Size(45, 16);
-            this.timeSpent1.TabIndex = 6;
-            this.timeSpent1.Text = "label5";
-            // 
-            // timeStamp1
-            // 
-            this.timeStamp1.AutoSize = true;
-            this.timeStamp1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeStamp1.Location = new System.Drawing.Point(65, 18);
-            this.timeStamp1.Name = "timeStamp1";
-            this.timeStamp1.Size = new System.Drawing.Size(45, 16);
-            this.timeStamp1.TabIndex = 5;
-            this.timeStamp1.Text = "label4";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 192);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Dinner:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 143);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Lunch:";
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.dataGastos);
+            this.tabPage2.Controls.Add(this.richTextBox1);
             this.tabPage2.Controls.Add(this.value);
+            this.tabPage2.Controls.Add(this.writeDocGastos);
+            this.tabPage2.Controls.Add(this.nextGasto);
+            this.tabPage2.Controls.Add(this.dataGastos);
             this.tabPage2.Controls.Add(this.openDocGastos);
             this.tabPage2.Controls.Add(this.nameDocGastos);
             this.tabPage2.Controls.Add(this.label7);
@@ -257,30 +156,35 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(592, 374);
+            this.tabPage2.Size = new System.Drawing.Size(812, 374);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // nextGasto
+            // 
+            this.nextGasto.Location = new System.Drawing.Point(196, 156);
+            this.nextGasto.Name = "nextGasto";
+            this.nextGasto.Size = new System.Drawing.Size(75, 23);
+            this.nextGasto.TabIndex = 10;
+            this.nextGasto.Text = "Next";
+            this.nextGasto.UseVisualStyleBackColor = true;
+            this.nextGasto.Click += new System.EventHandler(this.nextGasto_Click);
+            // 
             // dataGastos
             // 
-            this.dataGastos.Enabled = false;
-            this.dataGastos.Location = new System.Drawing.Point(69, 217);
+            this.dataGastos.Location = new System.Drawing.Point(69, 200);
             this.dataGastos.Multiline = true;
             this.dataGastos.Name = "dataGastos";
+            this.dataGastos.ReadOnly = true;
+            this.dataGastos.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.dataGastos.Size = new System.Drawing.Size(496, 122);
             this.dataGastos.TabIndex = 9;
-            // 
-            // value
-            // 
-            this.value.Location = new System.Drawing.Point(69, 55);
-            this.value.Name = "value";
-            this.value.Size = new System.Drawing.Size(100, 20);
-            this.value.TabIndex = 8;
+            this.dataGastos.WordWrap = false;
             // 
             // openDocGastos
             // 
-            this.openDocGastos.Location = new System.Drawing.Point(503, 345);
+            this.openDocGastos.Location = new System.Drawing.Point(482, 346);
             this.openDocGastos.Name = "openDocGastos";
             this.openDocGastos.Size = new System.Drawing.Size(83, 23);
             this.openDocGastos.TabIndex = 7;
@@ -292,7 +196,7 @@
             // 
             this.nameDocGastos.Location = new System.Drawing.Point(69, 348);
             this.nameDocGastos.Name = "nameDocGastos";
-            this.nameDocGastos.Size = new System.Drawing.Size(427, 20);
+            this.nameDocGastos.Size = new System.Drawing.Size(400, 20);
             this.nameDocGastos.TabIndex = 6;
             // 
             // label7
@@ -434,9 +338,127 @@
             this.bwest.Text = "BWEST";
             this.bwest.UseVisualStyleBackColor = true;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.pictureBox1);
+            this.tabPage1.Controls.Add(this.ToDo);
+            this.tabPage1.Controls.Add(this.nameDocComida);
+            this.tabPage1.Controls.Add(this.openDocComida);
+            this.tabPage1.Controls.Add(this.dataComidas);
+            this.tabPage1.Controls.Add(this.timeToilet);
+            this.tabPage1.Controls.Add(this.timeSpent1);
+            this.tabPage1.Controls.Add(this.timeStamp1);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.sendMeals);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.lunchMeal);
+            this.tabPage1.Controls.Add(this.dinnerMeal);
+            this.tabPage1.Controls.Add(this.breakfastMeal);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(812, 374);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(580, 79);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(226, 289);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
+            // ToDo
+            // 
+            this.ToDo.Location = new System.Drawing.Point(406, 27);
+            this.ToDo.Name = "ToDo";
+            this.ToDo.Size = new System.Drawing.Size(75, 23);
+            this.ToDo.TabIndex = 11;
+            this.ToDo.Text = "ToDo";
+            this.ToDo.UseVisualStyleBackColor = true;
+            this.ToDo.Click += new System.EventHandler(this.ToDo_Click);
+            // 
+            // nameDocComida
+            // 
+            this.nameDocComida.Location = new System.Drawing.Point(68, 348);
+            this.nameDocComida.Name = "nameDocComida";
+            this.nameDocComida.Size = new System.Drawing.Size(414, 20);
+            this.nameDocComida.TabIndex = 10;
+            // 
+            // openDocComida
+            // 
+            this.openDocComida.Location = new System.Drawing.Point(491, 345);
+            this.openDocComida.Name = "openDocComida";
+            this.openDocComida.Size = new System.Drawing.Size(75, 23);
+            this.openDocComida.TabIndex = 6;
+            this.openDocComida.Text = "Open File";
+            this.openDocComida.UseVisualStyleBackColor = true;
+            this.openDocComida.Click += new System.EventHandler(this.openDocComida_Click);
+            // 
+            // dataComidas
+            // 
+            this.dataComidas.Enabled = false;
+            this.dataComidas.Location = new System.Drawing.Point(308, 189);
+            this.dataComidas.Multiline = true;
+            this.dataComidas.Name = "dataComidas";
+            this.dataComidas.Size = new System.Drawing.Size(184, 130);
+            this.dataComidas.TabIndex = 8;
+            this.dataComidas.TabStop = false;
+            // 
+            // timeToilet
+            // 
+            this.timeToilet.Location = new System.Drawing.Point(308, 80);
+            this.timeToilet.Multiline = true;
+            this.timeToilet.Name = "timeToilet";
+            this.timeToilet.Size = new System.Drawing.Size(100, 80);
+            this.timeToilet.TabIndex = 5;
+            this.timeToilet.TextChanged += new System.EventHandler(this.timeToilet_TextChanged);
+            // 
+            // timeSpent1
+            // 
+            this.timeSpent1.AutoSize = true;
+            this.timeSpent1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeSpent1.Location = new System.Drawing.Point(65, 41);
+            this.timeSpent1.Name = "timeSpent1";
+            this.timeSpent1.Size = new System.Drawing.Size(45, 16);
+            this.timeSpent1.TabIndex = 6;
+            this.timeSpent1.Text = "label5";
+            // 
+            // timeStamp1
+            // 
+            this.timeStamp1.AutoSize = true;
+            this.timeStamp1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeStamp1.Location = new System.Drawing.Point(65, 18);
+            this.timeStamp1.Name = "timeStamp1";
+            this.timeStamp1.Size = new System.Drawing.Size(45, 16);
+            this.timeStamp1.TabIndex = 5;
+            this.timeStamp1.Text = "label4";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 192);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Dinner:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 143);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Lunch:";
+            // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.pictureBox1);
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.button1);
@@ -444,7 +466,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(592, 374);
+            this.tabPage3.Size = new System.Drawing.Size(812, 374);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -485,22 +507,44 @@
             this.textBox6.Size = new System.Drawing.Size(100, 20);
             this.textBox6.TabIndex = 0;
             // 
-            // pictureBox1
+            // writeDocGastos
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(344, 33);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(226, 289);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.writeDocGastos.Enabled = false;
+            this.writeDocGastos.Location = new System.Drawing.Point(302, 155);
+            this.writeDocGastos.Name = "writeDocGastos";
+            this.writeDocGastos.Size = new System.Drawing.Size(75, 23);
+            this.writeDocGastos.TabIndex = 11;
+            this.writeDocGastos.Text = "Write";
+            this.writeDocGastos.UseVisualStyleBackColor = true;
+            this.writeDocGastos.Click += new System.EventHandler(this.writeDocGastos_Click);
+            // 
+            // value
+            // 
+            this.value.DecimalPlaces = 2;
+            this.value.Location = new System.Drawing.Point(69, 56);
+            this.value.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.value.Name = "value";
+            this.value.Size = new System.Drawing.Size(100, 20);
+            this.value.TabIndex = 12;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(607, 55);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(165, 208);
+            this.richTextBox1.TabIndex = 13;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(624, 442);
+            this.ClientSize = new System.Drawing.Size(864, 442);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -508,15 +552,16 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.value)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -556,7 +601,6 @@
         private System.Windows.Forms.Button openDocGastos;
         private System.Windows.Forms.TextBox nameDocGastos;
         private System.Windows.Forms.TextBox nameDocComida;
-        private System.Windows.Forms.TextBox value;
         private System.Windows.Forms.TextBox dataGastos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox6;
@@ -564,6 +608,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button nextGasto;
+        private System.Windows.Forms.Button writeDocGastos;
+        private System.Windows.Forms.NumericUpDown value;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
