@@ -51,7 +51,7 @@ namespace Prueba
             DateTime ahora = DateTime.Today;
             daysHere = ((ahora - arrival).TotalDays).ToString();
             dayID = Convert.ToInt32((ahora - arrival).TotalDays);
-            
+            dayID = 1290;
             DateTime today = DateTime.Today;
             if (today.DayOfWeek == DayOfWeek.Monday) {
                 addMonday = "Monday";
@@ -61,9 +61,9 @@ namespace Prueba
                 addMonday = "";
             }
 
-            this.timeSpent1.Text = ((ahora - arrival).TotalDays).ToString() + " days" + addMonday  ;
+            this.timeSpent1.Text = daysHere + " days" + addMonday  ;
 
-            foreach (var c in this.tabControl1.TabPages[0].Controls.OfType<TextBox>())
+            foreach (var c in this.tabControl1.TabPages[1].Controls.OfType<TextBox>())
             {
                 if (c.Name.Contains("Meal")){
                     c.Multiline = true;
@@ -83,23 +83,12 @@ namespace Prueba
             nameDocComida.Enabled = false;
             sendMeals.Enabled = false;
 
-
-            //string query = "SELECT day,total,caus,credit,cash,dos,bwest FROM Budget WHERE day=@day";
-            string query = "SELECT * FROM Budget WHERE day=@day";
-            //string query = "SELECT * FROM Budget";
-            SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
-            connection.Open();
-            SqlCommand coms = new SqlCommand(query, connection);
-            coms.Parameters.AddWithValue("@day", dayID-1);
-           // coms.ExecuteNonQuery();
-            SqlDataReader reader = coms.ExecuteReader();
-            //int valID = Convert.ToInt32(coms.ExecuteReader());
+            dataB ini = new dataB();
+            SqlDataReader reader = ini.readLastDay(dayID);
             
-
-            string tx = "";//, td="", tg="";
+            string tx = "";
             List<string> list = new List<string>();
             while (reader.Read()){
-            
                 tx=tx+reader["day"].ToString();
                 td =  reader["cash"].ToString() +" cash "+ reader["caus"].ToString() + " caus "+ reader["dos"].ToString() + " dos " +reader["bwest"].ToString() +" bwest "+ reader["credit"].ToString() + " credit";
                 tg =  reader["total"].ToString() + " total";
@@ -107,17 +96,14 @@ namespace Prueba
                 list.Add(reader["day"].ToString());  
             }
 
-            breakfastMeal.Text = tx;
             dataGastos.Text = td + Environment.NewLine + tg;
-            connection.Close();
+            ini.closeD();
 
-            textBox3.Text = comida.ToString();
-
+            preValue.Text = comida.ToString();
             for (int i = 0; i < list.Count; i++)
             {
                 richTextBox1.Text += list[i];
             }
-
 
         }
 
@@ -125,44 +111,18 @@ namespace Prueba
         {
             if (typeSpenditure.SelectedIndex > 0)
             {
-                //this.textBox3.Text = this.typeSpenditure.SelectedValue.ToString();
                 thi = typeSpenditure.GetItemText(this.typeSpenditure.SelectedItem);
             }
-
         }
 
         private void sendMeals_Click(object sender, EventArgs e)
         {
             string salvar = timeToilet.Text + Environment.NewLine + breakfastMeal.Text + Environment.NewLine + lunchMeal.Text + Environment.NewLine + dinnerMeal.Text + Environment.NewLine;
-
             string fileName = fileComidas;
-            if (!File.Exists(fileName))
-            {
-                var doc1 = DocX.Create(fileName);
-                doc1.Save();
-            }
+            Uno h = new Uno();
 
-            // Create a document in memory:
-            var doc = DocX.Load(fileName);
-            string headlineText = daysHere +addMonday;
+            h.Saving(fileName, salvar, daysHere, addMonday);
 
-            // A formatting object for our headline:
-            var headLineFormat = new Formatting();
-            headLineFormat.FontFamily = new System.Drawing.FontFamily("Calibri");
-            headLineFormat.Size = 18D;
-            //headLineFormat.Position = 12;
-
-            // A formatting object for our normal paragraph text:
-            var paraFormat = new Formatting();
-            paraFormat.FontFamily = new System.Drawing.FontFamily("Calibri");
-            paraFormat.Size = 11D;
-
-            // Insert the now text obejcts;
-            doc.InsertParagraph(headlineText, false, headLineFormat);
-            doc.InsertParagraph(salvar, false, paraFormat);
-
-            // Save to the output directory:
-            doc.Save();
         }
 
         private void breakfast_TextChanged(object sender, EventArgs e)
@@ -197,7 +157,6 @@ namespace Prueba
             openFileGastos.Filter = "Doc Files (.docx)|*.docx|All Files (*.*)|*.*";
             if (openFileGastos.ShowDialog() == DialogResult.OK)
             {
-                //label1.Text = openFileDia.SafeFileName;
                 string docGastos = openFileGastos.FileName;
                 nameDocGastos.Text = docGastos;
                 writeDocGastos.Enabled = true; 
@@ -212,13 +171,11 @@ namespace Prueba
             openFileDia.Filter = "Doc Files (.docx)|*.docx|All Files (*.*)|*.*";
             if (openFileDia.ShowDialog() == DialogResult.OK)
             {
-                //label1.Text = openFileDia.SafeFileName;
                 string docComidas = openFileDia.FileName;
                 fileComidas = docComidas; 
                 nameDocComida.Text = docComidas;
             }
             if (File.Exists(fileComidas)) {
-
                 sendMeals.Enabled = true;
             }
         }
@@ -231,82 +188,38 @@ namespace Prueba
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //SqlConnection sc = new SqlConnection();
-            //SqlCommand com = new SqlCommand();
-            //sc.ConnectionString = (@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
-            //sc.Open();
-            //com.Connection = sc;
-            //com.CommandText = ("INSERT INTO Gastos (Value) VALUES ('" +textBox6.Text + "');");
-            //com.ExecuteNonQuery();
-            //sc.Close();
-            
-            //Properties.Settings.Default.dbGastosId++;
-            button1.Text = Properties.Settings.Default.dbGastosId.ToString();
 
+            button1.Text = Properties.Settings.Default.dbGastosId.ToString();
+            
             if (ID1<dayID){
                 string sql = "INSERT INTO Gastos (Id,Value) VALUES (@Id,@Value)";
                 SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
                 connection.Open();
                 SqlCommand command = new SqlCommand(sql, connection);
-
-                //command.Parameters.AddWithValue("@Id", Properties.Settings.Default.dbGastosId);
                 command.Parameters.AddWithValue("@Id", dayID);
-                command.Parameters.AddWithValue("@Value", textBox6.Text);
-
+                command.Parameters.AddWithValue("@Value", textTransport.Text);
                 command.ExecuteNonQuery();
-                //comma;
                 connection.Close();            
-            
             }
             if (ID1 == dayID) {
                 string sql = "UPDATE Gastos SET Value=@Value WHERE Id=@Id";
                 SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
                 connection.Open();
                 SqlCommand command = new SqlCommand(sql, connection);
-
-                //command.Parameters.AddWithValue("@Id", Properties.Settings.Default.dbGastosId);
                 command.Parameters.AddWithValue("@Id", dayID);
-                command.Parameters.AddWithValue("@Value", textBox6.Text);
-
+                command.Parameters.AddWithValue("@Value", textTransport.Text);
                 command.ExecuteNonQuery();
-                //comma;
                 connection.Close(); 
-            
             }
 
-            //string sql = "insert into gastos (id,value) values (@id,@value)";
-            //sqlconnection connection = new sqlconnection(@"data source=(localdb)\v11.0;attachdbfilename=c:\users\francisco\documents\visual studio 2013\projects\prueba\prueba\database1.mdf;integrated security=true");
-            //connection.open();
-            //sqlcommand command = new sqlcommand(sql, connection);
-
-            ////command.parameters.addwithvalue("@id", properties.settings.default.dbgastosid);
-            //command.parameters.addwithvalue("@id", dayid);
-            //command.parameters.addwithvalue("@value", textbox6.text);
-
-            //command.executenonquery();
-            ////comma;
-            //connection.close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string query = "SELECT MAX(Id) FROM Gastos";
-            SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
-            connection.Open(); 
-            SqlCommand comSelect = new SqlCommand(query, connection);
-            ID1 = Convert.ToInt32(comSelect.ExecuteScalar());
-            //textBox6.Text = ID.ToString();
-            connection.Close();
+            dataB n = new dataB();
+            ID1 = n.maxID();
             Properties.Settings.Default.dbGastosId = ID1;
             button1.Text = ID1.ToString();
-        }
-
-        private void value_TextChanged(object sender, EventArgs e)
-        {
-            //string gastosData = "";
-            //gastosData +=  value.Text + " " + thi;
-            
-
         }
 
         private void nextGasto_Click(object sender, EventArgs e)
@@ -320,19 +233,11 @@ namespace Prueba
             {
                 float cd = float.Parse(value.Text, CultureInfo.InvariantCulture.NumberFormat);
                 comida += cd;
-                textBox3.Text = comida.ToString();
-                string sql = "UPDATE Budget SET comida=@comida WHERE day=@day";
-                SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\Database1.mdf;Integrated Security=True");
-                connection.Open();
-                SqlCommand command = new SqlCommand(sql, connection);
+                preValue.Text = comida.ToString();
+                dataB jj = new dataB();
 
-                //command.Parameters.AddWithValue("@Id", Properties.Settings.Default.dbGastosId);
-                command.Parameters.AddWithValue("@day", dayID);
-                command.Parameters.AddWithValue("@comida", comida);
+                jj.updateData(dayID, comida);
 
-                command.ExecuteNonQuery();
-                //comma;
-                connection.Close();
             }
 
 
@@ -341,48 +246,12 @@ namespace Prueba
         private void writeDocGastos_Click(object sender, EventArgs e)
         {
             string salvar = td + Environment.NewLine + tg + Environment.NewLine + gastosData;
-
             string fileName = nameDocGastos.Text;
-            if (!File.Exists(fileName))
-            {
-                var doc1 = DocX.Create(fileName);
-                doc1.Save();
-            }
+            Uno he = new Uno();
 
-            // Create a document in memory:
-            var doc = DocX.Load(fileName);
-            string headlineText = daysHere + addMonday;
-
-            // A formatting object for our headline:
-            var headLineFormat = new Formatting();
-            headLineFormat.FontFamily = new System.Drawing.FontFamily("Calibri");
-            headLineFormat.Size = 18D;
-            //headLineFormat.Position = 12;
-
-            // A formatting object for our normal paragraph text:
-            var paraFormat = new Formatting();
-            paraFormat.FontFamily = new System.Drawing.FontFamily("Calibri");
-            paraFormat.Size = 11D;
-
-            // Insert the now text obejcts;
-            doc.InsertParagraph(headlineText, false, headLineFormat);
-            doc.InsertParagraph(salvar, false, paraFormat);
-
-            // Save to the output directory:
-            doc.Save();
+            he.Saving(fileName, salvar, daysHere, addMonday);
         }
-
-
-
-
-
-
-
-
-
-
 
 
     }
 }
-

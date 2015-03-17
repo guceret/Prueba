@@ -9,5 +9,5 @@ C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\obj\Debug
 C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\obj\Debug\Prueba.csproj.GenerateResource.Cache
 C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\obj\Debug\Prueba.exe
 C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\obj\Debug\Prueba.pdb
-C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\obj\Debug\Prueba.csprojResolveAssemblyReference.cache
 C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\obj\Debug\Prueba.Form2.resources
+C:\Users\Francisco\documents\visual studio 2013\Projects\Prueba\Prueba\obj\Debug\Prueba.csprojResolveAssemblyReference.cache

@@ -36,6 +36,9 @@
             this.dinnerMeal = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.value = new System.Windows.Forms.NumericUpDown();
+            this.writeDocGastos = new System.Windows.Forms.Button();
             this.nextGasto = new System.Windows.Forms.Button();
             this.dataGastos = new System.Windows.Forms.TextBox();
             this.openDocGastos = new System.Windows.Forms.Button();
@@ -44,7 +47,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.preValue = new System.Windows.Forms.TextBox();
             this.descriptionGasto = new System.Windows.Forms.TextBox();
             this.typeSpenditure = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -69,17 +72,14 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.writeDocGastos = new System.Windows.Forms.Button();
-            this.value = new System.Windows.Forms.NumericUpDown();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textTransport = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.value)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.value)).BeginInit();
             this.SuspendLayout();
             // 
             // sendMeals
@@ -149,7 +149,7 @@
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.preValue);
             this.tabPage2.Controls.Add(this.descriptionGasto);
             this.tabPage2.Controls.Add(this.typeSpenditure);
             this.tabPage2.Controls.Add(this.panel1);
@@ -160,6 +160,38 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(607, 55);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(165, 208);
+            this.richTextBox1.TabIndex = 13;
+            this.richTextBox1.Text = "";
+            // 
+            // value
+            // 
+            this.value.DecimalPlaces = 2;
+            this.value.Location = new System.Drawing.Point(69, 56);
+            this.value.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.value.Name = "value";
+            this.value.Size = new System.Drawing.Size(100, 20);
+            this.value.TabIndex = 12;
+            // 
+            // writeDocGastos
+            // 
+            this.writeDocGastos.Enabled = false;
+            this.writeDocGastos.Location = new System.Drawing.Point(277, 156);
+            this.writeDocGastos.Name = "writeDocGastos";
+            this.writeDocGastos.Size = new System.Drawing.Size(75, 23);
+            this.writeDocGastos.TabIndex = 11;
+            this.writeDocGastos.Text = "Write";
+            this.writeDocGastos.UseVisualStyleBackColor = true;
+            this.writeDocGastos.Click += new System.EventHandler(this.writeDocGastos_Click);
             // 
             // nextGasto
             // 
@@ -204,9 +236,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(66, 143);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.Size = new System.Drawing.Size(53, 13);
             this.label7.TabIndex = 4;
-            this.label7.Text = "label4";
+            this.label7.Text = "Pre-Value";
             // 
             // label6
             // 
@@ -235,12 +267,12 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Value: ";
             // 
-            // textBox3
+            // preValue
             // 
-            this.textBox3.Location = new System.Drawing.Point(69, 159);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 3;
+            this.preValue.Location = new System.Drawing.Point(69, 159);
+            this.preValue.Name = "preValue";
+            this.preValue.Size = new System.Drawing.Size(100, 20);
+            this.preValue.TabIndex = 3;
             // 
             // descriptionGasto
             // 
@@ -366,7 +398,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(580, 79);
+            this.pictureBox1.Location = new System.Drawing.Point(583, 30);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(226, 289);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -375,7 +407,7 @@
             // 
             // ToDo
             // 
-            this.ToDo.Location = new System.Drawing.Point(406, 27);
+            this.ToDo.Location = new System.Drawing.Point(417, 30);
             this.ToDo.Name = "ToDo";
             this.ToDo.Size = new System.Drawing.Size(75, 23);
             this.ToDo.TabIndex = 11;
@@ -387,12 +419,12 @@
             // 
             this.nameDocComida.Location = new System.Drawing.Point(68, 348);
             this.nameDocComida.Name = "nameDocComida";
-            this.nameDocComida.Size = new System.Drawing.Size(414, 20);
+            this.nameDocComida.Size = new System.Drawing.Size(424, 20);
             this.nameDocComida.TabIndex = 10;
             // 
             // openDocComida
             // 
-            this.openDocComida.Location = new System.Drawing.Point(491, 345);
+            this.openDocComida.Location = new System.Drawing.Point(583, 345);
             this.openDocComida.Name = "openDocComida";
             this.openDocComida.Size = new System.Drawing.Size(75, 23);
             this.openDocComida.TabIndex = 6;
@@ -415,7 +447,7 @@
             this.timeToilet.Location = new System.Drawing.Point(308, 80);
             this.timeToilet.Multiline = true;
             this.timeToilet.Name = "timeToilet";
-            this.timeToilet.Size = new System.Drawing.Size(100, 80);
+            this.timeToilet.Size = new System.Drawing.Size(184, 80);
             this.timeToilet.TabIndex = 5;
             this.timeToilet.TextChanged += new System.EventHandler(this.timeToilet_TextChanged);
             // 
@@ -423,7 +455,7 @@
             // 
             this.timeSpent1.AutoSize = true;
             this.timeSpent1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeSpent1.Location = new System.Drawing.Point(65, 41);
+            this.timeSpent1.Location = new System.Drawing.Point(65, 61);
             this.timeSpent1.Name = "timeSpent1";
             this.timeSpent1.Size = new System.Drawing.Size(45, 16);
             this.timeSpent1.TabIndex = 6;
@@ -433,7 +465,7 @@
             // 
             this.timeStamp1.AutoSize = true;
             this.timeStamp1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeStamp1.Location = new System.Drawing.Point(65, 18);
+            this.timeStamp1.Location = new System.Drawing.Point(65, 37);
             this.timeStamp1.Name = "timeStamp1";
             this.timeStamp1.Size = new System.Drawing.Size(45, 16);
             this.timeStamp1.TabIndex = 5;
@@ -462,7 +494,7 @@
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.button1);
-            this.tabPage3.Controls.Add(this.textBox6);
+            this.tabPage3.Controls.Add(this.textTransport);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -473,19 +505,19 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(148, 99);
+            this.button3.Location = new System.Drawing.Point(39, 41);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(100, 23);
             this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
+            this.button3.Text = "Max ID";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(170, 181);
+            this.button2.Location = new System.Drawing.Point(39, 89);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(100, 23);
             this.button2.TabIndex = 2;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -493,51 +525,19 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(148, 311);
+            this.button1.Location = new System.Drawing.Point(39, 133);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // textTransport
             // 
-            this.textBox6.Location = new System.Drawing.Point(39, 269);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 0;
-            // 
-            // writeDocGastos
-            // 
-            this.writeDocGastos.Enabled = false;
-            this.writeDocGastos.Location = new System.Drawing.Point(302, 155);
-            this.writeDocGastos.Name = "writeDocGastos";
-            this.writeDocGastos.Size = new System.Drawing.Size(75, 23);
-            this.writeDocGastos.TabIndex = 11;
-            this.writeDocGastos.Text = "Write";
-            this.writeDocGastos.UseVisualStyleBackColor = true;
-            this.writeDocGastos.Click += new System.EventHandler(this.writeDocGastos_Click);
-            // 
-            // value
-            // 
-            this.value.DecimalPlaces = 2;
-            this.value.Location = new System.Drawing.Point(69, 56);
-            this.value.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.value.Name = "value";
-            this.value.Size = new System.Drawing.Size(100, 20);
-            this.value.TabIndex = 12;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(607, 55);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(165, 208);
-            this.richTextBox1.TabIndex = 13;
-            this.richTextBox1.Text = "";
+            this.textTransport.Location = new System.Drawing.Point(39, 175);
+            this.textTransport.Name = "textTransport";
+            this.textTransport.Size = new System.Drawing.Size(100, 20);
+            this.textTransport.TabIndex = 0;
             // 
             // Form1
             // 
@@ -554,6 +554,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.value)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -561,7 +562,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.value)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -585,7 +585,7 @@
         private System.Windows.Forms.RadioButton cash;
         private System.Windows.Forms.RadioButton gift;
         private System.Windows.Forms.RadioButton bwest;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox preValue;
         private System.Windows.Forms.TextBox descriptionGasto;
         private System.Windows.Forms.ComboBox typeSpenditure;
         private System.Windows.Forms.Label timeSpent1;
@@ -603,7 +603,7 @@
         private System.Windows.Forms.TextBox nameDocComida;
         private System.Windows.Forms.TextBox dataGastos;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textTransport;
         private System.Windows.Forms.Button ToDo;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
