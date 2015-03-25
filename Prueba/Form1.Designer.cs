@@ -531,6 +531,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textTransport
             // 
@@ -570,7 +571,6 @@
 
         private System.Windows.Forms.Button sendMeals;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox lunchMeal;
         private System.Windows.Forms.TextBox breakfastMeal;
         private System.Windows.Forms.TextBox dinnerMeal;
         private System.Windows.Forms.TabControl tabControl1;
@@ -586,7 +586,6 @@
         private System.Windows.Forms.RadioButton gift;
         private System.Windows.Forms.RadioButton bwest;
         private System.Windows.Forms.TextBox preValue;
-        private System.Windows.Forms.TextBox descriptionGasto;
         private System.Windows.Forms.ComboBox typeSpenditure;
         private System.Windows.Forms.Label timeSpent1;
         private System.Windows.Forms.Label timeStamp1;
@@ -612,6 +611,8 @@
         private System.Windows.Forms.Button writeDocGastos;
         private System.Windows.Forms.NumericUpDown value;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        public System.Windows.Forms.TextBox descriptionGasto;
+        public System.Windows.Forms.TextBox lunchMeal;
     }
 }
 

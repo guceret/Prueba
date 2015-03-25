@@ -23,10 +23,12 @@ namespace Prueba
 
         public string  td,tg ,thi, gastosData, fileComidas, daysHere, addMonday;
         public int dayID, ID1;
-        public float comida, transport, accommodation, entre, supplies; 
-
+        public float comida, transport, accommodation, entre, supplies;
+        //dataB ono; 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+
 
             button1.Text = Properties.Settings.Default.dbGastosId.ToString();
             
@@ -84,6 +86,9 @@ namespace Prueba
             sendMeals.Enabled = false;
 
             dataB ini = new dataB();
+
+
+            ini.connect();
             SqlDataReader reader = ini.readLastDay(dayID);
             
             string tx = "";
@@ -216,7 +221,9 @@ namespace Prueba
 
         private void button3_Click(object sender, EventArgs e)
         {
+            
             dataB n = new dataB();
+            n.connect();
             ID1 = n.maxID();
             Properties.Settings.Default.dbGastosId = ID1;
             button1.Text = ID1.ToString();
@@ -250,6 +257,11 @@ namespace Prueba
             Uno he = new Uno();
 
             he.Saving(fileName, salvar, daysHere, addMonday);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
 
 
